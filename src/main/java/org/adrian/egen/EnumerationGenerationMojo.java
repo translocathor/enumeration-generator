@@ -30,10 +30,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Properties;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.commons.io.FilenameUtils;
-import org.codehaus.plexus.util.FileUtils;
 
 /**
  *
