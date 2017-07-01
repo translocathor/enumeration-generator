@@ -25,7 +25,7 @@ public enum StringKeys {
 ```
 Now you can access the key-value pairs by using an enum constant like
 ```java
-properties.get("KEY1")
+properties.get(StringKeys.KEY1.name())
 ```
 
 ## Usage
