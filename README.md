@@ -1,5 +1,5 @@
-# enumeration-generator
-Maven plugin to generate Java enumerations from properties files
+# Enumeration Generator
+Maven plugin to generate Java enumerations from properties files using [Apache FreeMarker](http://freemarker.org/)
 
 ## Motivation
 It is a common use case to load predefined key-value pairs from a properties file in a Java application. Whether you load application settings or localization text, you always need to provide a key for the value you want to load. Ususally you end up with code like this
