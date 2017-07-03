@@ -54,7 +54,7 @@ properties.get(StringKeys.KEY1.name());
         <!-- The properties file whose keys are used to generate the java enum file -->
         <propertiesFile>src/main/resources/bundles/de_DE_Strings.properties</propertiesFile>
         
-        <!-- The target for the generate java enum file -->
+        <!-- The target for the generated java enum file -->
         <outputFile>src/main/java/org/yourname/yourapp/StringKeys.java</outputFile>
       </configuration>
     </execution>
