@@ -33,6 +33,8 @@ import java.util.Set;
 import org.apache.commons.io.FilenameUtils;
 
 /**
+ * Maven plugin Mojo that generates Java enums from properties files using
+ * <a href="http://http://freemarker.org/">Apache FreeMarker</a>.
  *
  * @author Adrian Bingener
  */
@@ -40,12 +42,12 @@ import org.apache.commons.io.FilenameUtils;
 public class EnumerationGenerationMojo extends AbstractMojo {
 
     /**
-     * Parameter that defines the path to template that is being used to
+     * Parameter that defines the path to the template that is being used to
      * generate the output file. If the user doesn't specify a template, the
      * default enumeration template is used
-     * {@link Defaults.ENUMERATION_TEMPLATE_FILENAME}.
+     * {@link Defaults#ENUMERATION_TEMPLATE_FILENAME ENUMERATION_TEMPLATE_FILENAME}.
      */
-    @Parameter(property = "templatePath", required = true)
+    @Parameter(property = "templatePath", required = false)
     private File templatePath;
 
     /**
@@ -58,7 +60,8 @@ public class EnumerationGenerationMojo extends AbstractMojo {
 
     /**
      * The name for the Java <code>enum</code> as well as for the output file.
-     * This string must be a valid Java identifier
+     * This string must be a valid Java identifier. The name of the enum must be
+     * equal to the name of the output file
      */
     @Parameter(property = "enumName", required = true)
     private String enumName;
@@ -71,6 +74,10 @@ public class EnumerationGenerationMojo extends AbstractMojo {
     @Parameter(property = "propertiesFile", required = true)
     private File propertiesFile;
 
+    /**
+     * The path to the output file where the final enum is saved to. The name of
+     * this file must be equal to the enum name.
+     */
     @Parameter(property = "outputFile", required = true)
     private File outputFile;
 
@@ -112,8 +119,19 @@ public class EnumerationGenerationMojo extends AbstractMojo {
         // Get the key set from the loaded properties
         Set<String> keys = keyDerivator.derivateKeys(properties);
 
+        // Check if the user provided a custom template file. If he did, we will
+        // use the default template processor, otherwise the custom template
+        // processor is used. These two template processors only differ in the
+        // way that the template is loaded since the template loading is
+        // different when loading it as plugin resource instead as resource of
+        // the project which uses the plugin
+        TemplateProcessor templateProcessor;
+        if (templatePath == null || !templatePath.exists()) {
+            templateProcessor = new DefaultTemplateProcessor(new File(Defaults.ENUMERATION_TEMPLATE_FILENAME));
+        } else {
+            templateProcessor = new UserTemplateProcessor(templatePath);
+        }
         try {
-            TemplateProcessor templateProcessor = new FileTemplateProcessor(templatePath);
             Writer fileWriter = new FileWriter(outputFile);
             templateProcessor.process(packageName, enumName, keys, fileWriter);
         } catch (IOException ex) {

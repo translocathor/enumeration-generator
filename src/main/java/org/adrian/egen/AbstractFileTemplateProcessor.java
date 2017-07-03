@@ -15,59 +15,59 @@
  */
 package org.adrian.egen;
 
-import freemarker.cache.FileTemplateLoader;
-import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 /**
+ * A template processor that loads templates from files. This class only
+ * implements the processing of an already loaded template and leaves the
+ * implementation of the loading to subclasses.
  *
  * @author Adrian Bingener
  */
-public class FileTemplateProcessor implements TemplateProcessor {
-
-    protected final File templateFile;
+public abstract class AbstractFileTemplateProcessor implements TemplateProcessor {
 
     /**
-     * The freemarker configuration object. Since the official freemarker
-     * documentation says
-     * <a href="http://freemarker.org/docs/pgui_quickstart_createconfiguration.html">configuration
-     * instances meant to be application-level singletons</a>, this is created
-     * once per class.
-     *
+     * The template that is loaded by this template processor.
      */
-    protected Configuration configuration = new Configuration(Configuration.VERSION_2_3_26);
+    protected File templateFile;
 
-    public FileTemplateProcessor(File templateFile) {
+    /**
+     * Creates a new instance of {@link AbstractFileTemplateProcessor}. The
+     * given template file defines the template which is loaded before it is
+     * processed.
+     *
+     * @param templateFile The template that is being processed
+     */
+    public AbstractFileTemplateProcessor(File templateFile) {
         this.templateFile = templateFile;
-
     }
 
     @Override
     public void process(String packageName, String enumName, Set<String> keys, Writer writer) throws IOException, TemplateException {
 
-        //Load template from source folder
-        configuration.setDirectoryForTemplateLoading(templateFile.getParentFile());
-        Template template = configuration.getTemplate(templateFile.getName());
+        // Load the template from the file that the user provided in the
+        // constructor
+        Optional<Template> optionalTemplate = load(templateFile);
 
         // Build the data-model
+        // TODO: Replace with Constants
         Map<String, Object> data = new HashMap<>();
-        data.put("packageName", packageName);
-        data.put("enumName", enumName);
-        data.put("keys", keys);
+        data.put(Defaults.TEMPLATE_VARIABLE_PACKAGE_NAME, packageName);
+        data.put(Defaults.TEMPLATE_VARIABLE_ENUM_NAME, enumName);
+        data.put(Defaults.TEMPLATE_VARIABLE_KEYS, keys);
 
         // Write processed data to the provided writer
-        template.process(data, writer);
-        writer.flush();
+        if (optionalTemplate.isPresent()) {
+            optionalTemplate.get().process(data, writer);
+            writer.flush();
+        }
     }
 }
