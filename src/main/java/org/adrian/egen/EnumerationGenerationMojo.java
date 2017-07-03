@@ -33,6 +33,8 @@ import java.util.Set;
 import org.apache.commons.io.FilenameUtils;
 
 /**
+ * Maven plugin Mojo that generates Java enums from properties files using
+ * <a href="http://http://freemarker.org/">Apache FreeMarker</a>.
  *
  * @author Adrian Bingener
  */
@@ -40,10 +42,10 @@ import org.apache.commons.io.FilenameUtils;
 public class EnumerationGenerationMojo extends AbstractMojo {
 
     /**
-     * Parameter that defines the path to template that is being used to
+     * Parameter that defines the path to the template that is being used to
      * generate the output file. If the user doesn't specify a template, the
      * default enumeration template is used
-     * {@link Defaults.ENUMERATION_TEMPLATE_FILENAME}.
+     * {@link Defaults#ENUMERATION_TEMPLATE_FILENAME ENUMERATION_TEMPLATE_FILENAME}.
      */
     @Parameter(property = "templatePath", required = false)
     private File templatePath;
@@ -58,7 +60,8 @@ public class EnumerationGenerationMojo extends AbstractMojo {
 
     /**
      * The name for the Java <code>enum</code> as well as for the output file.
-     * This string must be a valid Java identifier
+     * This string must be a valid Java identifier. The name of the enum must be
+     * equal to the name of the output file
      */
     @Parameter(property = "enumName", required = true)
     private String enumName;
@@ -72,7 +75,8 @@ public class EnumerationGenerationMojo extends AbstractMojo {
     private File propertiesFile;
 
     /**
-     * The path to the output file where the final enum is saved to.
+     * The path to the output file where the final enum is saved to. The name of
+     * this file must be equal to the enum name.
      */
     @Parameter(property = "outputFile", required = true)
     private File outputFile;
@@ -82,7 +86,7 @@ public class EnumerationGenerationMojo extends AbstractMojo {
      * properties file.
      */
     private final KeyDerivator<String> keyDerivator = new DefaultKeyDerivator();
-    
+
     @Override
     public void execute() throws MojoExecutionException {
 

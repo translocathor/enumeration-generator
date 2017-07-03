@@ -28,15 +28,20 @@ import java.util.Optional;
 public class UserTemplateProcessor extends AbstractFileTemplateProcessor {
 
     /**
-     * The freemarker configuration object. Since the official freemarker
-     * documentation says
-     * <a href="http://freemarker.org/docs/pgui_quickstart_createconfiguration.html">configuration
-     * instances meant to be application-level singletons</a>, this is created
-     * once per class.
-     *
+     * The configuration which is required by FreeMarker to load templates.
      */
     protected Configuration configuration = new Configuration(Configuration.VERSION_2_3_26);
 
+    /**
+     * Creates a new instance of {@link UserTemplateProcessor}. The given
+     * template file defines the template which is loaded before it is
+     * processed. This template file must be located in the resource folder of
+     * the application which uses this plugin, otherwise the loading will fail.
+     * If you want to load the default template in case the user did not provide
+     * any, use the {@link DefaultTemplateProcessor}.
+     *
+     * @param templateFile The template that is being processed
+     */
     public UserTemplateProcessor(File templateFile) {
         super(templateFile);
     }
