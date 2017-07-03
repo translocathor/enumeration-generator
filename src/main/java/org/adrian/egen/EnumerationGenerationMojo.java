@@ -82,7 +82,7 @@ public class EnumerationGenerationMojo extends AbstractMojo {
      * properties file.
      */
     private final KeyDerivator<String> keyDerivator = new DefaultKeyDerivator();
-
+    
     @Override
     public void execute() throws MojoExecutionException {
 

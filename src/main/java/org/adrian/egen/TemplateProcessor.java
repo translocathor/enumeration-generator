@@ -20,6 +20,7 @@ import freemarker.template.TemplateException;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -28,7 +29,7 @@ import java.util.Set;
  */
 public interface TemplateProcessor {
 
-    Template load(File templateFile);
+    Optional<Template> load(File templateFile);
 
     void process(String packageName, String enumName, Set<String> keys, Writer writer) throws IOException, TemplateException;
 }

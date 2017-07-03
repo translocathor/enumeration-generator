@@ -19,8 +19,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Optional;
 
 /**
  *
@@ -45,18 +44,16 @@ public class UserTemplateProcessor extends AbstractFileTemplateProcessor {
         this.templateFile = templateFile;
     }
 
-    // TODO: Use an Optinal?
     @Override
-    public Template load(File templateFile) {
+    public Optional<Template> load(File templateFile) {
 
         try {
             // Load template from source folder
             configuration.setDirectoryForTemplateLoading(templateFile.getParentFile());
-            return configuration.getTemplate(templateFile.getName());
+            return Optional.ofNullable(configuration.getTemplate(templateFile.getName()));
         } catch (IOException ex) {
-            // TODO: Handle correctly
-            Logger.getLogger(UserTemplateProcessor.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            // TODO: Get a logger and print this exception
+            return Optional.empty();
         }
     }
 }

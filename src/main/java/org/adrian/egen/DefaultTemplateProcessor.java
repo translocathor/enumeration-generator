@@ -19,6 +19,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Processes the default enum template, which is used if the user did not
@@ -48,14 +49,15 @@ public class DefaultTemplateProcessor extends AbstractFileTemplateProcessor {
     }
 
     @Override
-    public Template load(File templateFile) {
+    public Optional<Template> load(File templateFile) {
 
         try {
             // Load template from source folder
             configuration.setClassForTemplateLoading(this.getClass(), "/org/adrian/egen/");
-            return configuration.getTemplate(templateFile.getName());
+            return Optional.ofNullable(configuration.getTemplate(templateFile.getName()));
         } catch (IOException ex) {
-            return null;
+            // TODO: Get a logger and print this exception
+            return Optional.empty();
         }
     }
 }
