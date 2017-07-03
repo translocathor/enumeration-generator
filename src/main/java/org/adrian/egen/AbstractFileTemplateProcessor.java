@@ -60,9 +60,9 @@ public abstract class AbstractFileTemplateProcessor implements TemplateProcessor
         // Build the data-model
         // TODO: Replace with Constants
         Map<String, Object> data = new HashMap<>();
-        data.put("packageName", packageName);
-        data.put("enumName", enumName);
-        data.put("keys", keys);
+        data.put(Defaults.TEMPLATE_VARIABLE_PACKAGE_NAME, packageName);
+        data.put(Defaults.TEMPLATE_VARIABLE_ENUM_NAME, enumName);
+        data.put(Defaults.TEMPLATE_VARIABLE_KEYS, keys);
 
         // Write processed data to the provided writer
         if (optionalTemplate.isPresent()) {

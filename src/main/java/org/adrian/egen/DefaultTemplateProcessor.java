@@ -53,7 +53,7 @@ public class DefaultTemplateProcessor extends AbstractFileTemplateProcessor {
 
         try {
             // Load template from source folder
-            configuration.setClassForTemplateLoading(this.getClass(), "/org/adrian/egen/");
+            configuration.setClassForTemplateLoading(this.getClass(), Defaults.ENUMERATION_TEMPLATE_DIRECTORY);
             return Optional.ofNullable(configuration.getTemplate(templateFile.getName()));
         } catch (IOException ex) {
             // TODO: Get a logger and print this exception

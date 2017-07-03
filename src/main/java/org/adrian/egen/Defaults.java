@@ -25,5 +25,25 @@ public class Defaults {
     /**
      * The default template that is used to generate an enumeration.
      */
-    public static final String ENUMERATION_TEMPLATE_FILENAME = "org/adrian/egen/enumeration-template-default.ftl";
+    public static final String ENUMERATION_TEMPLATE_FILENAME = "enumeration-template-default.ftl";
+    /**
+     * The directory where the default template is located.
+     */
+    public static final String ENUMERATION_TEMPLATE_DIRECTORY = "/org/adrian/egen/";
+    /**
+     * The name of the variable that is replaced by the package name that was
+     * specified.
+     */
+    public static final String TEMPLATE_VARIABLE_PACKAGE_NAME = "packageName";
+    /**
+     * The name of the variable that is replaced by the enum name that was
+     * specified.
+     */
+    public static final String TEMPLATE_VARIABLE_ENUM_NAME = "enumName";
+    /**
+     * The name of the variable that is replaced by the enum keys that where
+     * specified.
+     */
+    public static final String TEMPLATE_VARIABLE_KEYS = "enumKeys";
+
 }

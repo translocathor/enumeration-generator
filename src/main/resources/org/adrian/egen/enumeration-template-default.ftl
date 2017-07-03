@@ -1,7 +1,7 @@
 package ${packageName};
 
 public enum ${enumName} {
-<#list keys as key>
-	${key},
+<#list enumKeys as key>
+    ${key},
 </#list>
 }
