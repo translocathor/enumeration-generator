@@ -25,18 +25,17 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *
+ * 
  * @author Adrian Bingener
  */
-public abstract class AbstractTemplateProcessor implements TemplateProcessor {
+public abstract class AbstractFileTemplateProcessor implements TemplateProcessor {
 
     /**
      * The template that is loaded by this template processor.
      */
-    protected Template template;
     protected File templateFile;
 
-    public AbstractTemplateProcessor(File templateFile) {
+    public AbstractFileTemplateProcessor(File templateFile) {
         this.templateFile = templateFile;
     }
 
@@ -45,7 +44,7 @@ public abstract class AbstractTemplateProcessor implements TemplateProcessor {
 
         // Load the template from the file that the user provided in the
         // constructor
-        this.template = load(templateFile);
+        Template template = load(templateFile);
 
         // Build the data-model
         Map<String, Object> data = new HashMap<>();

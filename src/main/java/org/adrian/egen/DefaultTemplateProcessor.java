@@ -24,7 +24,7 @@ import java.io.IOException;
  *
  * @author Adrian Bingener
  */
-public class DefaultTemplateProcessor extends AbstractTemplateProcessor {
+public class DefaultTemplateProcessor extends AbstractFileTemplateProcessor {
 
     protected Configuration configuration = new Configuration(Configuration.VERSION_2_3_26);
 
@@ -38,8 +38,7 @@ public class DefaultTemplateProcessor extends AbstractTemplateProcessor {
         try {
             // Load template from source folder
             configuration.setClassForTemplateLoading(this.getClass(), "/org/adrian/egen/");
-            template = configuration.getTemplate(templateFile.getName());
-            return template;
+            return configuration.getTemplate(templateFile.getName());
         } catch (IOException ex) {
             return null;
         }

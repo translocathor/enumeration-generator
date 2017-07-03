@@ -26,7 +26,7 @@ import java.util.logging.Logger;
  *
  * @author Adrian Bingener
  */
-public class FileTemplateProcessor extends AbstractTemplateProcessor {
+public class FileTemplateProcessor extends AbstractFileTemplateProcessor {
 
     protected final File templateFile;
 
@@ -52,8 +52,7 @@ public class FileTemplateProcessor extends AbstractTemplateProcessor {
         try {
             // Load template from source folder
             configuration.setDirectoryForTemplateLoading(templateFile.getParentFile());
-            template = configuration.getTemplate(templateFile.getName());
-            return template;
+            return configuration.getTemplate(templateFile.getName());
         } catch (IOException ex) {
             // TODO: Handle correctly
             Logger.getLogger(FileTemplateProcessor.class.getName()).log(Level.SEVERE, null, ex);
