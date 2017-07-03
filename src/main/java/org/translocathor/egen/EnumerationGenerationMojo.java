@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.adrian.egen;
+package org.translocathor.egen;
 
 import freemarker.template.TemplateException;
 import org.apache.maven.plugin.AbstractMojo;
@@ -34,7 +34,7 @@ import org.apache.commons.io.FilenameUtils;
 
 /**
  * Maven plugin Mojo that generates Java enums from properties files using
- * <a href="http://http://freemarker.org/">Apache FreeMarker</a>.
+ * <a href="http://freemarker.org/">Apache FreeMarker</a>.
  *
  * @author Adrian Bingener
  */

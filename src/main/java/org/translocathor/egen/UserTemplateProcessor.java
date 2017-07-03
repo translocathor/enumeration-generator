@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.adrian.egen;
+package org.translocathor.egen;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -22,12 +22,10 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * Processes the default enum template, which is used if the user did not
- * provide his own template.
  *
  * @author Adrian Bingener
  */
-public class DefaultTemplateProcessor extends AbstractFileTemplateProcessor {
+public class UserTemplateProcessor extends AbstractFileTemplateProcessor {
 
     /**
      * The configuration which is required by FreeMarker to load templates.
@@ -35,16 +33,16 @@ public class DefaultTemplateProcessor extends AbstractFileTemplateProcessor {
     protected Configuration configuration = new Configuration(Configuration.VERSION_2_3_26);
 
     /**
-     * Creates a new instance of {@link DefaultTemplateProcessor}. The given
+     * Creates a new instance of {@link UserTemplateProcessor}. The given
      * template file defines the template which is loaded before it is
      * processed. This template file must be located in the resource folder of
-     * this plugin, otherwise the loading will fail. If you want to load a
-     * template that was provided by the user of this plugin, use the
-     * {@link UserTemplateProcessor}.
+     * the application which uses this plugin, otherwise the loading will fail.
+     * If you want to load the default template in case the user did not provide
+     * any, use the {@link DefaultTemplateProcessor}.
      *
      * @param templateFile The template that is being processed
      */
-    public DefaultTemplateProcessor(File templateFile) {
+    public UserTemplateProcessor(File templateFile) {
         super(templateFile);
     }
 
@@ -53,7 +51,7 @@ public class DefaultTemplateProcessor extends AbstractFileTemplateProcessor {
 
         try {
             // Load template from source folder
-            configuration.setClassForTemplateLoading(this.getClass(), Defaults.ENUMERATION_TEMPLATE_DIRECTORY);
+            configuration.setDirectoryForTemplateLoading(templateFile.getParentFile());
             return Optional.ofNullable(configuration.getTemplate(templateFile.getName()));
         } catch (IOException ex) {
             // TODO: Get a logger and print this exception

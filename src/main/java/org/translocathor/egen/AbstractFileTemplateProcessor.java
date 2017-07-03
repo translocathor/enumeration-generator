@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.adrian.egen;
+package org.translocathor.egen;
 
 import freemarker.template.Template;
 import freemarker.template.TemplateException;

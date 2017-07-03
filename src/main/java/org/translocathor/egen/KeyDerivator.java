@@ -13,30 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.adrian.egen;
+package org.translocathor.egen;
 
-import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
 /**
- * A default implementation of {@link KeyDerivator} that simply returns the keys
- * of the given properties file without any conversion.
+ * A KeyDerivator is used to get a set of key from a provided properties file.
  *
  * @author Adrian Bingener
+ * @param <T> The type of the key elements
  */
-public class DefaultKeyDerivator implements KeyDerivator<String> {
+public interface KeyDerivator<T> {
 
     /**
-     * Returns the keys from the given {@link Properties} file.
+     * Derivates a list of keys from the given {@link Properties}. This list can
+     * be larger or smaller than the actual set of keys that are present in the
+     * properties
      *
      * @param properties The properties which is used to derivate a list of keys
-     * @return The key set of the given properties file
+     * @return A set of keys, derivated from the given properties file
      */
-    @Override
-    public Set<String> derivateKeys(Properties properties) {
-        Set<String> keySet = new HashSet<>();
-        properties.keySet().forEach(key -> keySet.add(String.valueOf(key)));
-        return keySet;
-    }
+    public Set<T> derivateKeys(Properties properties);
 }
