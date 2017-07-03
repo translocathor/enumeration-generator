@@ -27,8 +27,6 @@ import java.util.Optional;
  */
 public class UserTemplateProcessor extends AbstractFileTemplateProcessor {
 
-    protected final File templateFile;
-
     /**
      * The freemarker configuration object. Since the official freemarker
      * documentation says
@@ -41,7 +39,6 @@ public class UserTemplateProcessor extends AbstractFileTemplateProcessor {
 
     public UserTemplateProcessor(File templateFile) {
         super(templateFile);
-        this.templateFile = templateFile;
     }
 
     @Override
