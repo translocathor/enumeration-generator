@@ -1,5 +1,5 @@
 # Enumeration Generator
-Maven plugin to generate Java enumerations from properties files using [Apache FreeMarker](http://freemarker.org/)
+Maven plugin to generate Java enumerations from properties files using [Apache FreeMarker](http://freemarker.org/).
 
 ## Motivation
 It is a common use case to load predefined key-value pairs from a properties file in a Java application. Whether you load application settings or localization text, you always need to provide a key for the value you want to load. Ususally you end up with code like this
@@ -25,7 +25,7 @@ public enum StringKeys {
 ```
 Now you can access the key-value pairs by using an enum constant like
 ```java
-properties.get(StringKeys.KEY1.name())
+properties.get(StringKeys.KEY1.name());
 ```
 
 ## Usage
@@ -44,14 +44,18 @@ properties.get(StringKeys.KEY1.name())
         <goal>generate-enumeration</goal>
       </goals>
       <configuration>
+      
         <!-- The name that is used as package name in the output java file -->
-        <packageName>org.adrian.egen</packageName>
+        <packageName>org.yourname.yourapp</packageName>
+        
         <!-- The enum name identifier in the output java file -->
         <enumName>StringKeys</enumName>
+        
         <!-- The properties file whose keys are used to generate the java enum file -->
         <propertiesFile>src/main/resources/bundles/de_DE_Strings.properties</propertiesFile>
+        
         <!-- The target for the generate java enum file -->
-        <outputFile>src/main/java/org/adrian/egen/StringKeys.java</outputFile>
+        <outputFile>src/main/java/org/yourname/yourapp/StringKeys.java</outputFile>
       </configuration>
     </execution>
   </executions>
