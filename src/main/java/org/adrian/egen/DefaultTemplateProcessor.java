@@ -21,13 +21,28 @@ import java.io.File;
 import java.io.IOException;
 
 /**
+ * Processes the default enum template, which is used if the user did not
+ * provide his own template.
  *
  * @author Adrian Bingener
  */
 public class DefaultTemplateProcessor extends AbstractFileTemplateProcessor {
 
+    /**
+     * The configuration which is required by FreeMarker to load templates.
+     */
     protected Configuration configuration = new Configuration(Configuration.VERSION_2_3_26);
 
+    /**
+     * Creates a new instance of {@link DefaultTemplateProcessor}. The given
+     * template file defines the template which is loaded before it is
+     * processed. This template file must be located in the resource folder of
+     * this plugin, otherwise the loading will fail. If you want to load a
+     * template that was provided by the user of this plugin, use the
+     * {@link UserTemplateProcessor}.
+     *
+     * @param templateFile The template that is being processed
+     */
     public DefaultTemplateProcessor(File templateFile) {
         super(templateFile);
     }

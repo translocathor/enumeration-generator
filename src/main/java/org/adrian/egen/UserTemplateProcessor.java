@@ -26,7 +26,7 @@ import java.util.logging.Logger;
  *
  * @author Adrian Bingener
  */
-public class FileTemplateProcessor extends AbstractFileTemplateProcessor {
+public class UserTemplateProcessor extends AbstractFileTemplateProcessor {
 
     protected final File templateFile;
 
@@ -40,7 +40,7 @@ public class FileTemplateProcessor extends AbstractFileTemplateProcessor {
      */
     protected Configuration configuration = new Configuration(Configuration.VERSION_2_3_26);
 
-    public FileTemplateProcessor(File templateFile) {
+    public UserTemplateProcessor(File templateFile) {
         super(templateFile);
         this.templateFile = templateFile;
     }
@@ -55,7 +55,7 @@ public class FileTemplateProcessor extends AbstractFileTemplateProcessor {
             return configuration.getTemplate(templateFile.getName());
         } catch (IOException ex) {
             // TODO: Handle correctly
-            Logger.getLogger(FileTemplateProcessor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserTemplateProcessor.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }

@@ -125,7 +125,7 @@ public class EnumerationGenerationMojo extends AbstractMojo {
         if (templatePath == null || !templatePath.exists()) {
             templateProcessor = new DefaultTemplateProcessor(new File(Defaults.ENUMERATION_TEMPLATE_FILENAME));
         } else {
-            templateProcessor = new FileTemplateProcessor(templatePath);
+            templateProcessor = new UserTemplateProcessor(templatePath);
         }
         try {
             Writer fileWriter = new FileWriter(outputFile);

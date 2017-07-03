@@ -25,7 +25,10 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 
+ * A template processor that loads templates from files. This class only
+ * implements the processing of an already loaded template and leaves the
+ * implementation of the loading to subclasses.
+ *
  * @author Adrian Bingener
  */
 public abstract class AbstractFileTemplateProcessor implements TemplateProcessor {
@@ -35,6 +38,13 @@ public abstract class AbstractFileTemplateProcessor implements TemplateProcessor
      */
     protected File templateFile;
 
+    /**
+     * Creates a new instance of {@link AbstractFileTemplateProcessor}. The
+     * given template file defines the template which is loaded before it is
+     * processed.
+     *
+     * @param templateFile The template that is being processed
+     */
     public AbstractFileTemplateProcessor(File templateFile) {
         this.templateFile = templateFile;
     }
@@ -47,6 +57,7 @@ public abstract class AbstractFileTemplateProcessor implements TemplateProcessor
         Template template = load(templateFile);
 
         // Build the data-model
+        // TODO: Replace with Constants
         Map<String, Object> data = new HashMap<>();
         data.put("packageName", packageName);
         data.put("enumName", enumName);
