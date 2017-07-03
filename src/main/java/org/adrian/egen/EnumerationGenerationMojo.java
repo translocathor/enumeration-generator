@@ -45,7 +45,7 @@ public class EnumerationGenerationMojo extends AbstractMojo {
      * default enumeration template is used
      * {@link Defaults.ENUMERATION_TEMPLATE_FILENAME}.
      */
-    @Parameter(property = "templatePath", required = true)
+    @Parameter(property = "templatePath", required = false)
     private File templatePath;
 
     /**
@@ -71,6 +71,9 @@ public class EnumerationGenerationMojo extends AbstractMojo {
     @Parameter(property = "propertiesFile", required = true)
     private File propertiesFile;
 
+    /**
+     * The path to the output file where the final enum is saved to.
+     */
     @Parameter(property = "outputFile", required = true)
     private File outputFile;
 
@@ -112,8 +115,19 @@ public class EnumerationGenerationMojo extends AbstractMojo {
         // Get the key set from the loaded properties
         Set<String> keys = keyDerivator.derivateKeys(properties);
 
+        // Check if the user provided a custom template file. If he did, we will
+        // use the default template processor, otherwise the custom template
+        // processor is used. These two template processors only differ in the
+        // way that the template is loaded since the template loading is
+        // different when loading it as plugin resource instead as resource of
+        // the project which uses the plugin
+        TemplateProcessor templateProcessor;
+        if (templatePath == null || !templatePath.exists()) {
+            templateProcessor = new DefaultTemplateProcessor(new File(Defaults.ENUMERATION_TEMPLATE_FILENAME));
+        } else {
+            templateProcessor = new FileTemplateProcessor(templatePath);
+        }
         try {
-            TemplateProcessor templateProcessor = new FileTemplateProcessor(templatePath);
             Writer fileWriter = new FileWriter(outputFile);
             templateProcessor.process(packageName, enumName, keys, fileWriter);
         } catch (IOException ex) {

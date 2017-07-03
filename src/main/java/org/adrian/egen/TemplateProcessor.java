@@ -15,7 +15,9 @@
  */
 package org.adrian.egen;
 
+import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Set;
@@ -25,6 +27,8 @@ import java.util.Set;
  * @author Adrian Bingener
  */
 public interface TemplateProcessor {
+
+    Template load(File templateFile);
 
     void process(String packageName, String enumName, Set<String> keys, Writer writer) throws IOException, TemplateException;
 }

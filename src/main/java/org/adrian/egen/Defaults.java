@@ -25,5 +25,5 @@ public class Defaults {
     /**
      * The default template that is used to generate an enumeration.
      */
-    public static final String ENUMERATION_TEMPLATE_FILENAME = "enumeration-template-default.ftl";
+    public static final String ENUMERATION_TEMPLATE_FILENAME = "org/adrian/egen/enumeration-template-default.ftl";
 }

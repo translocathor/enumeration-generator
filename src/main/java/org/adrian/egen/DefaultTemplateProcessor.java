@@ -19,44 +19,28 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Adrian Bingener
  */
-public class FileTemplateProcessor extends AbstractTemplateProcessor {
+public class DefaultTemplateProcessor extends AbstractTemplateProcessor {
 
-    protected final File templateFile;
-
-    /**
-     * The freemarker configuration object. Since the official freemarker
-     * documentation says
-     * <a href="http://freemarker.org/docs/pgui_quickstart_createconfiguration.html">configuration
-     * instances meant to be application-level singletons</a>, this is created
-     * once per class.
-     *
-     */
     protected Configuration configuration = new Configuration(Configuration.VERSION_2_3_26);
 
-    public FileTemplateProcessor(File templateFile) {
+    public DefaultTemplateProcessor(File templateFile) {
         super(templateFile);
-        this.templateFile = templateFile;
     }
 
-    // TODO: Use an Optinal?
     @Override
     public Template load(File templateFile) {
 
         try {
             // Load template from source folder
-            configuration.setDirectoryForTemplateLoading(templateFile.getParentFile());
+            configuration.setClassForTemplateLoading(this.getClass(), "/org/adrian/egen/");
             template = configuration.getTemplate(templateFile.getName());
             return template;
         } catch (IOException ex) {
-            // TODO: Handle correctly
-            Logger.getLogger(FileTemplateProcessor.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
