@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -54,7 +55,7 @@ public abstract class AbstractFileTemplateProcessor implements TemplateProcessor
 
         // Load the template from the file that the user provided in the
         // constructor
-        Template template = load(templateFile);
+        Optional<Template> optionalTemplate = load(templateFile);
 
         // Build the data-model
         // TODO: Replace with Constants
@@ -64,7 +65,9 @@ public abstract class AbstractFileTemplateProcessor implements TemplateProcessor
         data.put("keys", keys);
 
         // Write processed data to the provided writer
-        template.process(data, writer);
-        writer.flush();
+        if (optionalTemplate.isPresent()) {
+            optionalTemplate.get().process(data, writer);
+            writer.flush();
+        }
     }
 }
