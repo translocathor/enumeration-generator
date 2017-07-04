@@ -31,6 +31,7 @@ public class UserTemplateProcessor extends AbstractFileTemplateProcessor {
      * The configuration which is required by FreeMarker to load templates.
      */
     protected Configuration configuration = new Configuration(Configuration.VERSION_2_3_26);
+    private final File templateDirectory;
 
     /**
      * Creates a new instance of {@link UserTemplateProcessor}. The given
@@ -40,19 +41,21 @@ public class UserTemplateProcessor extends AbstractFileTemplateProcessor {
      * If you want to load the default template in case the user did not provide
      * any, use the {@link DefaultTemplateProcessor}.
      *
-     * @param templateFile The template that is being processed
+     * @param templateDirectory
+     * @param templateFileName The template that is being processed
      */
-    public UserTemplateProcessor(File templateFile) {
-        super(templateFile);
+    public UserTemplateProcessor(File templateDirectory, String templateFileName) {
+        super(templateFileName);
+        this.templateDirectory = templateDirectory;
     }
 
     @Override
-    public Optional<Template> load(File templateFile) {
+    public Optional<Template> load(String templateFileName) {
 
         try {
             // Load template from source folder
-            configuration.setDirectoryForTemplateLoading(templateFile.getParentFile());
-            return Optional.ofNullable(configuration.getTemplate(templateFile.getName()));
+            configuration.setDirectoryForTemplateLoading(templateDirectory);
+            return Optional.ofNullable(configuration.getTemplate(templateFileName));
         } catch (IOException ex) {
             // TODO: Get a logger and print this exception
             return Optional.empty();

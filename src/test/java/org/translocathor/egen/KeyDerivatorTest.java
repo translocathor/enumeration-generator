@@ -15,6 +15,7 @@
  */
 package org.translocathor.egen;
 
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import org.junit.Assert;
@@ -26,40 +27,31 @@ import org.junit.Test;
  *
  * @author Adrian Bingener
  */
-public class DefaultKeyDerivatorTest {
+public class KeyDerivatorTest extends PropertiesFixtureTest {
 
-    private DefaultKeyDerivator defaultKeyDerivator;
-    private Properties emptyProperties;
-    private Properties nonEmptyProperties;
+    private KeyDerivator defaultKeyDerivator;
 
     @Before
-    public void setUp() {
+    public void setUpDerivator() {
         // Create class instance to test
         defaultKeyDerivator = new DefaultKeyDerivator();
-
-        // Create properties that are used as data source
-        emptyProperties = new Properties();
-        nonEmptyProperties = new Properties();
-        nonEmptyProperties.put("SETTING_BUTTON_OK.Text", "OK");
-        nonEmptyProperties.put("SETTING_BUTTON_OK.Tooltip", "Saves all settings and minimizes the window");
-        nonEmptyProperties.put("SETTINGS_BUTTON_CANCEL.Text", "");
     }
 
     @Test
     public void derivateKeysShouldBeEmpty() {
-        Set<String> keys = defaultKeyDerivator.derivateKeys(emptyProperties);
+        List<String> keys = defaultKeyDerivator.derivateKeys(emptyProperties);
         Assert.assertTrue(keys.isEmpty());
     }
 
     @Test
     public void derivateKeysShouldNotBeEmpty() {
-        Set<String> keys = defaultKeyDerivator.derivateKeys(nonEmptyProperties);
+        List<String> keys = defaultKeyDerivator.derivateKeys(propertiesComplexKeys);
         Assert.assertFalse(keys.isEmpty());
     }
 
     @Test
     public void derivateKeysShouldContainThreeKeys() {
-        Set<String> keys = defaultKeyDerivator.derivateKeys(nonEmptyProperties);
+        List<String> keys = defaultKeyDerivator.derivateKeys(propertiesComplexKeys);
         Assert.assertTrue(keys.size() == 3);
     }
 
@@ -70,9 +62,9 @@ public class DefaultKeyDerivatorTest {
 
     @Test
     public void derivateKeysShouldContainThePropertiesKeys() {
-        Set<String> keys = defaultKeyDerivator.derivateKeys(nonEmptyProperties);
-        Assert.assertTrue(keys.contains("SETTING_BUTTON_OK.Text"));
-        Assert.assertTrue(keys.contains("SETTING_BUTTON_OK.Tooltip"));
-        Assert.assertTrue(keys.contains("SETTINGS_BUTTON_CANCEL.Text"));
+        List<String> keys = defaultKeyDerivator.derivateKeys(propertiesComplexKeys);
+        Assert.assertTrue(keys.contains("SETTING_BUTTON_OK_Text"));
+        Assert.assertTrue(keys.contains("SETTING_BUTTON_OK_Tooltip"));
+        Assert.assertTrue(keys.contains("SETTINGS_BUTTON_CANCEL_Text"));
     }
 }

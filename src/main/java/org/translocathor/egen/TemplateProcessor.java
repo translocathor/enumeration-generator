@@ -17,11 +17,10 @@ package org.translocathor.egen;
 
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * The processor interface to load and process FreeMarker
@@ -39,11 +38,11 @@ public interface TemplateProcessor {
      * {@link #process(java.lang.String, java.lang.String, java.util.Set, java.io.Writer) process}
      * and may return an empty Optional if an error occurred during the loading.
      *
-     * @param templateFile The file that specifies the template
+     * @param templateFileName The file that specifies the template
      * @return An Optional containing the loaded template or an empty Optional
      * if an error occurred during the loading
      */
-    Optional<Template> load(File templateFile);
+    Optional<Template> load(String templateFileName);
 
     /**
      * Processes the template provided by the {@link #load(java.io.File) load}
@@ -66,5 +65,5 @@ public interface TemplateProcessor {
      * @throws TemplateException If an exception occurs during template
      * processing
      */
-    void process(String packageName, String enumName, Set<String> enumKeys, Writer writer) throws IOException, TemplateException;
+    void process(String packageName, String enumName, List<String> enumKeys, Writer writer) throws IOException, TemplateException;
 }

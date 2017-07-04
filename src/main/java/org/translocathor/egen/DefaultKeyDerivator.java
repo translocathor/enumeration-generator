@@ -15,9 +15,9 @@
  */
 package org.translocathor.egen;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
-import java.util.Set;
 
 /**
  * A default implementation of {@link KeyDerivator} that simply returns the keys
@@ -34,8 +34,8 @@ public class DefaultKeyDerivator implements KeyDerivator<String> {
      * @return The key set of the given properties file
      */
     @Override
-    public Set<String> derivateKeys(Properties properties) {
-        Set<String> keySet = new HashSet<>();
+    public List<String> derivateKeys(Properties properties) {
+        List<String> keySet = new ArrayList<>();
         properties.keySet().forEach(key -> keySet.add(String.valueOf(key)));
         return keySet;
     }

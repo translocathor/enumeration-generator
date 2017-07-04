@@ -33,6 +33,7 @@ public class DefaultTemplateProcessor extends AbstractFileTemplateProcessor {
      * The configuration which is required by FreeMarker to load templates.
      */
     protected Configuration configuration = new Configuration(Configuration.VERSION_2_3_26);
+    private final File templateDirectory;
 
     /**
      * Creates a new instance of {@link DefaultTemplateProcessor}. The given
@@ -42,20 +43,23 @@ public class DefaultTemplateProcessor extends AbstractFileTemplateProcessor {
      * template that was provided by the user of this plugin, use the
      * {@link UserTemplateProcessor}.
      *
-     * @param templateFile The template that is being processed
+     * @param templateDirectory
+     * @param templateFileName The template that is being processed
      */
-    public DefaultTemplateProcessor(File templateFile) {
-        super(templateFile);
+    public DefaultTemplateProcessor(File templateDirectory, String templateFileName) {
+        super(templateFileName);
+        this.templateDirectory = templateDirectory;
     }
 
     @Override
-    public Optional<Template> load(File templateFile) {
+    public Optional<Template> load(String templateFileName) {
 
         try {
             // Load template from source folder
-            configuration.setClassForTemplateLoading(this.getClass(), Defaults.ENUMERATION_TEMPLATE_DIRECTORY);
-            return Optional.ofNullable(configuration.getTemplate(templateFile.getName()));
+            configuration.setClassForTemplateLoading(this.getClass(), templateDirectory.getPath());
+            return Optional.ofNullable(configuration.getTemplate(templateFileName));
         } catch (IOException ex) {
+            ex.printStackTrace();
             // TODO: Get a logger and print this exception
             return Optional.empty();
         }

@@ -28,8 +28,8 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.List;
 import java.util.Properties;
-import java.util.Set;
 import org.apache.commons.io.FilenameUtils;
 
 /**
@@ -117,7 +117,7 @@ public class EnumerationGenerationMojo extends AbstractMojo {
         }
 
         // Get the key set from the loaded properties
-        Set<String> keys = keyDerivator.derivateKeys(properties);
+        List<String> keys = keyDerivator.derivateKeys(properties);
 
         // Check if the user provided a custom template file. If he did, we will
         // use the default template processor, otherwise the custom template
@@ -127,9 +127,9 @@ public class EnumerationGenerationMojo extends AbstractMojo {
         // the project which uses the plugin
         TemplateProcessor templateProcessor;
         if (templatePath == null || !templatePath.exists()) {
-            templateProcessor = new DefaultTemplateProcessor(new File(Defaults.ENUMERATION_TEMPLATE_FILENAME));
+            templateProcessor = new DefaultTemplateProcessor(new File(Defaults.ENUMERATION_TEMPLATE_DIRECTORY), Defaults.ENUMERATION_TEMPLATE_FILENAME);
         } else {
-            templateProcessor = new UserTemplateProcessor(templatePath);
+            templateProcessor = new UserTemplateProcessor(templatePath.getParentFile(), templatePath.getName());
         }
         try {
             Writer fileWriter = new FileWriter(outputFile);
