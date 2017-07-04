@@ -33,6 +33,9 @@ import org.junit.Test;
  */
 public class DefaultTemplateProcessorTest extends PropertiesFixtureTest {
 
+    /**
+     * The template processor that is being tested.
+     */
     private TemplateProcessor templateProcessor;
 
     @Before
