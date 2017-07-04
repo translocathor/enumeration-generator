@@ -42,7 +42,7 @@ public abstract class PropertiesFixtureTest {
     protected Properties propertiesSimpleKeys;
 
     @Before
-    public void setUp() {
+    public void setUpProperties() {
         // Build empty properties
         emptyProperties = new Properties();
 
@@ -58,5 +58,10 @@ public abstract class PropertiesFixtureTest {
         propertiesComplexKeys.put("SETTING_BUTTON_OK_Text", "OK");
         propertiesComplexKeys.put("SETTING_BUTTON_OK_Tooltip", "Saves all settings and minimizes the window");
         propertiesComplexKeys.put("SETTINGS_BUTTON_CANCEL_Text", "");
+        propertiesComplexKeys.put("Text", "");
+        propertiesComplexKeys.put("T", "");
+        propertiesComplexKeys.put("_", "");
+        propertiesComplexKeys.put("", "");
+        propertiesComplexKeys.put(" ", "");
     }
 }
