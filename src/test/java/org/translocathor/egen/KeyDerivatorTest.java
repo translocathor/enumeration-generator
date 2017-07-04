@@ -27,42 +27,61 @@ import org.junit.Test;
  */
 public class KeyDerivatorTest extends PropertiesFixtureTest {
 
+    /**
+     * The key derivator that is tested.
+     */
     private KeyDerivator defaultKeyDerivator;
 
     @Before
     public void setUpDerivator() {
-        // Create class instance to test
+        // If there will be more instances this will be converted to a
+        // parameterized test with multiple KeyDerivator instances to test
         defaultKeyDerivator = new DefaultKeyDerivator();
     }
 
     @Test
-    public void derivateKeysShouldBeEmpty() {
+    public void derivateKeysFromEmptyPropertiesShouldBeEmpty() {
         List<String> keys = defaultKeyDerivator.derivateKeys(emptyProperties);
-        Assert.assertTrue(keys.isEmpty());
+        Assert.assertTrue("Expected derived key list to be empty", keys.isEmpty());
     }
 
     @Test
-    public void derivateKeysShouldNotBeEmpty() {
+    public void derivateKeysFromSimplePropertiesShouldNotBeEmpty() {
+        List<String> keys = defaultKeyDerivator.derivateKeys(propertiesSimpleKeys);
+        Assert.assertFalse(keys.isEmpty());
+    }
+
+    @Test
+    public void derivateKeysFromComplexPropertiesShouldNotBeEmpty() {
         List<String> keys = defaultKeyDerivator.derivateKeys(propertiesComplexKeys);
         Assert.assertFalse(keys.isEmpty());
     }
 
     @Test
-    public void derivateKeysShouldContainThreeKeys() {
+    public void derivateKeysFromComplexPropertiesShouldMatchInSize() {
         List<String> keys = defaultKeyDerivator.derivateKeys(propertiesComplexKeys);
-        Assert.assertTrue(keys.size() == 3);
+        Assert.assertTrue(keys.size() == propertiesComplexKeys.keySet().size());
+    }
+
+    @Test
+    public void derivateKeysFromSimplePropertiesShouldMatchInSize() {
+        List<String> keys = defaultKeyDerivator.derivateKeys(propertiesSimpleKeys);
+        Assert.assertTrue(keys.size() == propertiesSimpleKeys.keySet().size());
     }
 
     @Test(expected = NullPointerException.class)
-    public void derivateKeysShouldNotThrowNullPointer() {
+    public void derivateKeysOnNullRefShouldNotThrowNullpointer() {
         defaultKeyDerivator.derivateKeys(null);
     }
 
     @Test
     public void derivateKeysShouldContainThePropertiesKeys() {
         List<String> keys = defaultKeyDerivator.derivateKeys(propertiesComplexKeys);
-        Assert.assertTrue(keys.contains("SETTING_BUTTON_OK_Text"));
-        Assert.assertTrue(keys.contains("SETTING_BUTTON_OK_Tooltip"));
-        Assert.assertTrue(keys.contains("SETTINGS_BUTTON_CANCEL_Text"));
+
+        // Check if all keys from the properties are contained in the derived
+        // key list
+        propertiesComplexKeys.keySet().forEach(key -> {
+            Assert.assertTrue(keys.contains(String.valueOf(key)));
+        });
     }
 }
