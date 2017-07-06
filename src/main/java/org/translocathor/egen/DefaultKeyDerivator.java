@@ -21,14 +21,15 @@ import java.util.Properties;
 
 /**
  * A default implementation of {@link KeyDerivator} that simply returns the keys
- * of the given properties file without any conversion.
+ * of the given properties file that are valid Java identifiers.
  *
  * @author Adrian Bingener
  */
 public class DefaultKeyDerivator implements KeyDerivator<String> {
 
     /**
-     * Returns the keys from the given {@link Properties} file.
+     * Returns the keys from the given {@link Properties} that are valid Java
+     * identifiers.
      *
      * @param properties The properties which is used to derivate a list of keys
      * @return The key set of the given properties file
@@ -36,7 +37,7 @@ public class DefaultKeyDerivator implements KeyDerivator<String> {
     @Override
     public List<String> derivateKeys(Properties properties) {
         List<String> keySet = new ArrayList<>();
-        properties.keySet().forEach(key -> keySet.add(String.valueOf(key)));
+        properties.keySet().stream().map((key) -> String.valueOf(key)).filter((stringKey) -> (Util.isValidJavaIdentifier(stringKey))).forEachOrdered((stringKey) -> keySet.add(stringKey));
         return keySet;
     }
 }
