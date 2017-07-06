@@ -22,15 +22,20 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
+ * Processes the enum template, which was provided by the user.
  *
  * @author Adrian Bingener
  */
-public class UserTemplateProcessor extends AbstractFileTemplateProcessor {
+public class UserTemplateProcessor extends AbstractTemplateProcessor {
 
     /**
      * The configuration which is required by FreeMarker to load templates.
      */
     protected Configuration configuration = new Configuration(Configuration.VERSION_2_3_26);
+    /**
+     * The directory from where the template is loaded.
+     */
+    private final File templateDirectory;
 
     /**
      * Creates a new instance of {@link UserTemplateProcessor}. The given
@@ -40,21 +45,24 @@ public class UserTemplateProcessor extends AbstractFileTemplateProcessor {
      * If you want to load the default template in case the user did not provide
      * any, use the {@link DefaultTemplateProcessor}.
      *
-     * @param templateFile The template that is being processed
+     * @param templateDirectory
+     * @param templateFileName The template that is being processed
      */
-    public UserTemplateProcessor(File templateFile) {
-        super(templateFile);
+    public UserTemplateProcessor(File templateDirectory, String templateFileName) {
+        super(templateFileName);
+        this.templateDirectory = templateDirectory;
     }
 
     @Override
-    public Optional<Template> load(File templateFile) {
+    public Optional<Template> load(String templateFileName) {
 
         try {
             // Load template from source folder
-            configuration.setDirectoryForTemplateLoading(templateFile.getParentFile());
-            return Optional.ofNullable(configuration.getTemplate(templateFile.getName()));
+            configuration.setDirectoryForTemplateLoading(templateDirectory);
+            return Optional.of(configuration.getTemplate(templateFileName));
         } catch (IOException ex) {
             // TODO: Get a logger and print this exception
+            ex.printStackTrace();
             return Optional.empty();
         }
     }

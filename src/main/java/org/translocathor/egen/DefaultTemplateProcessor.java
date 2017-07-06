@@ -27,35 +27,44 @@ import java.util.Optional;
  *
  * @author Adrian Bingener
  */
-public class DefaultTemplateProcessor extends AbstractFileTemplateProcessor {
+public class DefaultTemplateProcessor extends AbstractTemplateProcessor {
 
     /**
      * The configuration which is required by FreeMarker to load templates.
      */
     protected Configuration configuration = new Configuration(Configuration.VERSION_2_3_26);
+    /**
+     * The directory from where the template is loaded.
+     */
+    private final File templateDirectory;
 
     /**
      * Creates a new instance of {@link DefaultTemplateProcessor}. The given
-     * template file defines the template which is loaded before it is
-     * processed. This template file must be located in the resource folder of
-     * this plugin, otherwise the loading will fail. If you want to load a
-     * template that was provided by the user of this plugin, use the
+     * <code>templateFileName</code> defines the template which is loaded before
+     * it is processed. This template file must be located in the resource
+     * folder of this plugin, otherwise the loading will fail. Further you need
+     * to provide the <code>templateDirectory</code>, which defines the folder
+     * from where the template is loaded. If you want to load a template that
+     * was provided by the user of this plugin, use the
      * {@link UserTemplateProcessor}.
      *
-     * @param templateFile The template that is being processed
+     * @param templateDirectory The directory from where the template is loaded
+     * @param templateFileName The template that is being processed
      */
-    public DefaultTemplateProcessor(File templateFile) {
-        super(templateFile);
+    public DefaultTemplateProcessor(File templateDirectory, String templateFileName) {
+        super(templateFileName);
+        this.templateDirectory = templateDirectory;
     }
 
     @Override
-    public Optional<Template> load(File templateFile) {
+    public Optional<Template> load(String templateFileName) {
 
         try {
             // Load template from source folder
-            configuration.setClassForTemplateLoading(this.getClass(), Defaults.ENUMERATION_TEMPLATE_DIRECTORY);
-            return Optional.ofNullable(configuration.getTemplate(templateFile.getName()));
+            configuration.setClassForTemplateLoading(this.getClass(), templateDirectory.getPath());
+            return Optional.ofNullable(configuration.getTemplate(templateFileName));
         } catch (IOException ex) {
+            ex.printStackTrace();
             // TODO: Get a logger and print this exception
             return Optional.empty();
         }

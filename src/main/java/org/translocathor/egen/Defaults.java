@@ -16,7 +16,7 @@
 package org.translocathor.egen;
 
 /**
- * Defines static accessible default values.
+ * Defines static default values.
  *
  * @author Adrian Bingener
  */
@@ -29,7 +29,7 @@ public class Defaults {
     /**
      * The directory where the default template is located.
      */
-    public static final String ENUMERATION_TEMPLATE_DIRECTORY = "/org/adrian/egen/";
+    public static final String ENUMERATION_TEMPLATE_DIRECTORY = "/org/translocathor/egen/";
     /**
      * The name of the variable that is replaced by the package name that was
      * specified.

@@ -15,8 +15,8 @@
  */
 package org.translocathor.egen;
 
+import java.util.List;
 import java.util.Properties;
-import java.util.Set;
 
 /**
  * A KeyDerivator is used to get a set of key from a provided properties file.
@@ -34,5 +34,5 @@ public interface KeyDerivator<T> {
      * @param properties The properties which is used to derivate a list of keys
      * @return A set of keys, derivated from the given properties file
      */
-    public Set<T> derivateKeys(Properties properties);
+    public List<T> derivateKeys(Properties properties);
 }

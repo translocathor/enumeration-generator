@@ -17,48 +17,47 @@ package org.translocathor.egen;
 
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * A template processor that loads templates from files. This class only
  * implements the processing of an already loaded template and leaves the
- * implementation of the loading to subclasses.
+ * implementation of the template loading to subclasses.
  *
  * @author Adrian Bingener
  */
-public abstract class AbstractFileTemplateProcessor implements TemplateProcessor {
+public abstract class AbstractTemplateProcessor implements TemplateProcessor {
 
     /**
-     * The template that is loaded by this template processor.
+     * The filename of the template that is loaded by
+     * {@link #load(java.lang.String) load}.
      */
-    protected File templateFile;
+    protected String templateFileName;
 
     /**
      * Creates a new instance of {@link AbstractFileTemplateProcessor}. The
-     * given template file defines the template which is loaded before it is
-     * processed.
+     * given template file name defines the template which is loaded before it
+     * is processed.
      *
-     * @param templateFile The template that is being processed
+     * @param templateFileName The filename of the template that is processed
      */
-    public AbstractFileTemplateProcessor(File templateFile) {
-        this.templateFile = templateFile;
+    public AbstractTemplateProcessor(String templateFileName) {
+        this.templateFileName = templateFileName;
     }
 
     @Override
-    public void process(String packageName, String enumName, Set<String> keys, Writer writer) throws IOException, TemplateException {
+    public void process(String packageName, String enumName, List<String> keys, Writer writer) throws IOException, TemplateException {
 
         // Load the template from the file that the user provided in the
         // constructor
-        Optional<Template> optionalTemplate = load(templateFile);
+        Optional<Template> optionalTemplate = load(templateFileName);
 
         // Build the data-model
-        // TODO: Replace with Constants
         Map<String, Object> data = new HashMap<>();
         data.put(Defaults.TEMPLATE_VARIABLE_PACKAGE_NAME, packageName);
         data.put(Defaults.TEMPLATE_VARIABLE_ENUM_NAME, enumName);

@@ -15,28 +15,29 @@
  */
 package org.translocathor.egen;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
-import java.util.Set;
 
 /**
  * A default implementation of {@link KeyDerivator} that simply returns the keys
- * of the given properties file without any conversion.
+ * of the given properties file that are valid Java identifiers.
  *
  * @author Adrian Bingener
  */
 public class DefaultKeyDerivator implements KeyDerivator<String> {
 
     /**
-     * Returns the keys from the given {@link Properties} file.
+     * Returns the keys from the given {@link Properties} that are valid Java
+     * identifiers.
      *
      * @param properties The properties which is used to derivate a list of keys
      * @return The key set of the given properties file
      */
     @Override
-    public Set<String> derivateKeys(Properties properties) {
-        Set<String> keySet = new HashSet<>();
-        properties.keySet().forEach(key -> keySet.add(String.valueOf(key)));
+    public List<String> derivateKeys(Properties properties) {
+        List<String> keySet = new ArrayList<>();
+        properties.keySet().stream().map((key) -> String.valueOf(key)).filter((stringKey) -> (Util.isValidJavaIdentifier(stringKey))).forEachOrdered((stringKey) -> keySet.add(stringKey));
         return keySet;
     }
 }

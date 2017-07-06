@@ -28,8 +28,8 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.List;
 import java.util.Properties;
-import java.util.Set;
 import org.apache.commons.io.FilenameUtils;
 
 /**
@@ -92,10 +92,10 @@ public class EnumerationGenerationMojo extends AbstractMojo {
 
         // Validate properties file
         if (!propertiesFile.exists()) {
-            throw new MojoExecutionException("The file '" + propertiesFile + "' does not exist, but is required");
+            throw new MojoExecutionException("The properties file '" + propertiesFile + "' does not exist, but is required");
         }
 
-        // Create output file folder
+        // Create output file folder if it does not exist
         if (!outputFile.exists()) {
             outputFile.getParentFile().mkdirs();
         }
@@ -106,8 +106,6 @@ public class EnumerationGenerationMojo extends AbstractMojo {
             getLog().warn("Output filename does not match the enum name");
         }
 
-        // TODO: Check if packageName is a valid Java package name
-        // TODO: Check if enumName is a valid Java identifier
         // Use the file to load the properties instance
         Properties properties = new Properties();
         try (FileInputStream propertiesInputStream = new FileInputStream(propertiesFile)) {
@@ -117,7 +115,7 @@ public class EnumerationGenerationMojo extends AbstractMojo {
         }
 
         // Get the key set from the loaded properties
-        Set<String> keys = keyDerivator.derivateKeys(properties);
+        List<String> keys = keyDerivator.derivateKeys(properties);
 
         // Check if the user provided a custom template file. If he did, we will
         // use the default template processor, otherwise the custom template
@@ -127,10 +125,13 @@ public class EnumerationGenerationMojo extends AbstractMojo {
         // the project which uses the plugin
         TemplateProcessor templateProcessor;
         if (templatePath == null || !templatePath.exists()) {
-            templateProcessor = new DefaultTemplateProcessor(new File(Defaults.ENUMERATION_TEMPLATE_FILENAME));
+            templateProcessor = new DefaultTemplateProcessor(new File(Defaults.ENUMERATION_TEMPLATE_DIRECTORY), Defaults.ENUMERATION_TEMPLATE_FILENAME);
         } else {
-            templateProcessor = new UserTemplateProcessor(templatePath);
+            templateProcessor = new UserTemplateProcessor(templatePath.getParentFile(), templatePath.getName());
         }
+
+        // Process the template with the data and write the result to the
+        // writer
         try {
             Writer fileWriter = new FileWriter(outputFile);
             templateProcessor.process(packageName, enumName, keys, fileWriter);
