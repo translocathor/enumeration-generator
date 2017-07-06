@@ -55,9 +55,10 @@ public class UserTemplateProcessor extends AbstractFileTemplateProcessor {
         try {
             // Load template from source folder
             configuration.setDirectoryForTemplateLoading(templateDirectory);
-            return Optional.ofNullable(configuration.getTemplate(templateFileName));
+            return Optional.of(configuration.getTemplate(templateFileName));
         } catch (IOException ex) {
             // TODO: Get a logger and print this exception
+            ex.printStackTrace();
             return Optional.empty();
         }
     }
