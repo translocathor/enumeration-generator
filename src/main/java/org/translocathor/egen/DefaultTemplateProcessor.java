@@ -27,7 +27,7 @@ import java.util.Optional;
  *
  * @author Adrian Bingener
  */
-public class DefaultTemplateProcessor extends AbstractFileTemplateProcessor {
+public class DefaultTemplateProcessor extends AbstractTemplateProcessor {
 
     /**
      * The configuration which is required by FreeMarker to load templates.

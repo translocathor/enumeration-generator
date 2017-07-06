@@ -27,11 +27,11 @@ import java.util.Optional;
 /**
  * A template processor that loads templates from files. This class only
  * implements the processing of an already loaded template and leaves the
- * implementation of the loading to subclasses.
+ * implementation of the template loading to subclasses.
  *
  * @author Adrian Bingener
  */
-public abstract class AbstractFileTemplateProcessor implements TemplateProcessor {
+public abstract class AbstractTemplateProcessor implements TemplateProcessor {
 
     /**
      * The template that is loaded by this template processor.
@@ -45,7 +45,7 @@ public abstract class AbstractFileTemplateProcessor implements TemplateProcessor
      *
      * @param templateFileName The template name that is being processed
      */
-    public AbstractFileTemplateProcessor(String templateFileName) {
+    public AbstractTemplateProcessor(String templateFileName) {
         this.templateFileName = templateFileName;
     }
 
