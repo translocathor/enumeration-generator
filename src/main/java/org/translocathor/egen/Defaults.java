@@ -16,7 +16,7 @@
 package org.translocathor.egen;
 
 /**
- * Defines static accessible default values.
+ * Defines static default values.
  *
  * @author Adrian Bingener
  */
