@@ -92,10 +92,10 @@ public class EnumerationGenerationMojo extends AbstractMojo {
 
         // Validate properties file
         if (!propertiesFile.exists()) {
-            throw new MojoExecutionException("The file '" + propertiesFile + "' does not exist, but is required");
+            throw new MojoExecutionException("The properties file '" + propertiesFile + "' does not exist, but is required");
         }
 
-        // Create output file folder
+        // Create output file folder if it does not exist
         if (!outputFile.exists()) {
             outputFile.getParentFile().mkdirs();
         }
@@ -106,8 +106,6 @@ public class EnumerationGenerationMojo extends AbstractMojo {
             getLog().warn("Output filename does not match the enum name");
         }
 
-        // TODO: Check if packageName is a valid Java package name
-        // TODO: Check if enumName is a valid Java identifier
         // Use the file to load the properties instance
         Properties properties = new Properties();
         try (FileInputStream propertiesInputStream = new FileInputStream(propertiesFile)) {
@@ -131,6 +129,9 @@ public class EnumerationGenerationMojo extends AbstractMojo {
         } else {
             templateProcessor = new UserTemplateProcessor(templatePath.getParentFile(), templatePath.getName());
         }
+
+        // Process the template with the data and write the result to the
+        // writer
         try {
             Writer fileWriter = new FileWriter(outputFile);
             templateProcessor.process(packageName, enumName, keys, fileWriter);
