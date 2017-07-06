@@ -48,7 +48,7 @@ public class DefaultTemplateProcessorTest extends PropertiesFixtureTest {
     public void outputShouldMatchSimpleEnum() throws Exception {
         // Get the set of keys from the simple properties
         List<String> keys = new ArrayList<>();
-        propertiesSimpleKeys.keySet().forEach((object) -> keys.add(String.valueOf(object)));
+        propertiesSimpleValid.keySet().forEach((object) -> keys.add(String.valueOf(object)));
 
         // Needs to be done, since the properties key set is not returned in the
         // order the values are stored in the file. This workaround requires the
@@ -62,9 +62,56 @@ public class DefaultTemplateProcessorTest extends PropertiesFixtureTest {
 
         // Load the file that contains the expected content for the simple
         // properties
-        InputStream resourceAsStream = getClass().getResourceAsStream("/org/translocathor/egen/fixtures/PropertiesSimpleKeysExpected.txt");
+        InputStream resourceAsStream = getClass().getResourceAsStream("/org/translocathor/egen/fixtures/PropertiesSimpleExpected.txt");
         String expected = IOUtils.toString(resourceAsStream, "UTF-8");
 
         Assert.assertTrue("Expected enums to be equal", expected.equals(stringWriter.toString()));
+    }
+
+    @Test
+    public void outputShouldMatchComplexEnum() throws Exception {
+        // Get the set of keys from the simple properties
+        List<String> keys = new ArrayList<>();
+        propertiesComplexValid.keySet().forEach((object) -> keys.add(String.valueOf(object)));
+
+        // Needs to be done, since the properties key set is not returned in the
+        // order the values are stored in the file. This workaround requires the
+        // reference file, that is used for comparison, to be sorted as well.
+        Collections.sort(keys);
+
+        // Process the default template using the default template processor and
+        // the simple keys. The output is writter to the given writer.
+        Writer stringWriter = new StringWriter();
+        templateProcessor.process("org.translocathor.egen.test", "StringKeys", keys, stringWriter);
+
+        // Load the file that contains the expected content for the simple
+        // properties
+        InputStream resourceAsStream = getClass().getResourceAsStream("/org/translocathor/egen/fixtures/PropertiesComplexExpected.txt");
+        String expected = IOUtils.toString(resourceAsStream, "UTF-8");
+
+        Assert.assertTrue("Expected enums to be equal", expected.equals(stringWriter.toString()));
+    }
+    @Test
+    public void outputShouldMatchEmptyEnum() throws Exception {
+        // Get the set of keys from the simple properties
+        List<String> keys = new ArrayList<>();
+        propertiesEmpty.keySet().forEach((object) -> keys.add(String.valueOf(object)));
+
+        // Needs to be done, since the properties key set is not returned in the
+        // order the values are stored in the file. This workaround requires the
+        // reference file, that is used for comparison, to be sorted as well.
+        Collections.sort(keys);
+
+        // Process the default template using the default template processor and
+        // the simple keys. The output is writter to the given writer.
+        Writer stringWriter = new StringWriter();
+        templateProcessor.process("org.translocathor.egen.test", "StringKeys", keys, stringWriter);
+
+        // Load the file that contains the expected content for the simple
+        // properties
+        InputStream resourceAsStream = getClass().getResourceAsStream("/org/translocathor/egen/fixtures/PropertiesEmptyExpected.txt");
+        String expected = IOUtils.toString(resourceAsStream, "UTF-8");
+        
+        Assert.assertTrue("Expected enums to be empty", expected.equals(stringWriter.toString()));
     }
 }

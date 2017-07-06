@@ -29,39 +29,50 @@ public abstract class PropertiesFixtureTest {
     /**
      * Empty properties that contain no keys.
      */
-    protected Properties emptyProperties;
-    /**
-     * Properties that contain complex keys containing upper- and lowercase
-     * characters as well as underscores.
-     */
-    protected Properties propertiesComplexKeys;
+    protected Properties propertiesEmpty;
     /**
      * Properties that contain simple keys containing only uppercase characters
      * and digits.
      */
-    protected Properties propertiesSimpleKeys;
+    protected Properties propertiesSimpleValid;
+    /**
+     * Properties that contain complex keys containing upper- and lowercase
+     * characters as well as underscores.
+     */
+    protected Properties propertiesComplexValid;
+    /**
+     * Properties that contain complex keys containing all kinds of keys, some
+     * of which are not valid Java identifiers. Th e
+     */
+    protected Properties propertiesInvalid;
 
     @Before
     public void setUpProperties() {
         // Build empty properties
-        emptyProperties = new Properties();
+        propertiesEmpty = new Properties();
 
         // Build simple properties
-        propertiesSimpleKeys = new Properties();
-        propertiesSimpleKeys.put("KEY1", "Value1");
-        propertiesSimpleKeys.put("KEY2", "Value2");
-        propertiesSimpleKeys.put("KEY3", "Value3");
-        propertiesSimpleKeys.put("KEY4", "Value4");
+        propertiesSimpleValid = new Properties();
+        propertiesSimpleValid.put("KEY1", "Value1");
+        propertiesSimpleValid.put("KEY2", "Value2");
+        propertiesSimpleValid.put("KEY3", "Value3");
+        propertiesSimpleValid.put("KEY4", "Value4");
 
         // Build complex properties
-        propertiesComplexKeys = new Properties();
-        propertiesComplexKeys.put("SETTING_BUTTON_OK_Text", "OK");
-        propertiesComplexKeys.put("SETTING_BUTTON_OK_Tooltip", "Saves all settings and minimizes the window");
-        propertiesComplexKeys.put("SETTINGS_BUTTON_CANCEL_Text", "");
-        propertiesComplexKeys.put("Text", "");
-        propertiesComplexKeys.put("T", "");
-        propertiesComplexKeys.put("_", "");
-        propertiesComplexKeys.put("", "");
-        propertiesComplexKeys.put(" ", "");
+        propertiesComplexValid = new Properties();
+        propertiesComplexValid.put("SETTING_BUTTON_OK_Text", "OK");
+        propertiesComplexValid.put("SETTING_BUTTON_OK_Tooltip", "Saves all settings and minimizes the window");
+        propertiesComplexValid.put("SETTINGS_BUTTON_CANCEL_Text", "");
+        propertiesComplexValid.put("Text", "");
+        propertiesComplexValid.put("T", "");
+        propertiesComplexValid.put("_", "");
+        
+        propertiesInvalid = new Properties();
+        propertiesInvalid.put("SETTING_BUTTON_OK.Text", "Button");
+        propertiesInvalid.put("SETTING_BUTTON_OK Tooltip", "Executes an eaction");
+        propertiesInvalid.put(")", "Parantheses");
+        propertiesInvalid.put("?", "Questionmark");
+        propertiesInvalid.put("", "");
+        propertiesInvalid.put(" ", "");
     }
 }

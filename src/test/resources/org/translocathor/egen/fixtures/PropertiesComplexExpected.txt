@@ -1,0 +1,10 @@
+package org.translocathor.egen.test;
+
+public enum StringKeys {
+    SETTINGS_BUTTON_CANCEL_Text,
+    SETTING_BUTTON_OK_Text,
+    SETTING_BUTTON_OK_Tooltip,
+    T,
+    Text,
+    _,
+}
