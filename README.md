@@ -1,4 +1,4 @@
-#Notice
+# Notice
 This Plugin is **NOT** yet available at Maven Central. If you want to use it, you will need to clone and build it yourself.
 
 # Enumeration Generator
