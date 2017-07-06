@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The processor interface to load and process FreeMarker
+ * The template processor interface to load and process FreeMarker
  * {@link Template Templates} to generate a Java enum with the parameters
  * provided by the
  * {@link #process(java.lang.String, java.lang.String, java.util.Set, java.io.Writer) process}

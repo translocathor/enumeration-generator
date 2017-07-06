@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
+ * Processes the enum template, which was provided by the user.
  *
  * @author Adrian Bingener
  */
@@ -31,6 +32,9 @@ public class UserTemplateProcessor extends AbstractTemplateProcessor {
      * The configuration which is required by FreeMarker to load templates.
      */
     protected Configuration configuration = new Configuration(Configuration.VERSION_2_3_26);
+    /**
+     * The directory from where the template is loaded.
+     */
     private final File templateDirectory;
 
     /**
