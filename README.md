@@ -1,3 +1,6 @@
+#Notice
+This Plugin is **NOT** yet available at Maven Central. If you want to use it, you will need to clone and build it yourself.
+
 # Enumeration Generator
 Maven plugin to generate Java enumerations from properties files using [Apache FreeMarker](http://freemarker.org/).
 
@@ -44,16 +47,16 @@ properties.get(StringKeys.KEY1.name());
         <goal>generate-enumeration</goal>
       </goals>
       <configuration>
-      
+
         <!-- The name that is used as package name in the output java file -->
         <packageName>org.yourname.yourapp</packageName>
-        
+
         <!-- The enum name identifier in the output java file -->
         <enumName>StringKeys</enumName>
-        
+
         <!-- The properties file whose keys are used to generate the java enum file -->
         <propertiesFile>src/main/resources/bundles/de_DE_Strings.properties</propertiesFile>
-        
+
         <!-- The target for the generated java enum file -->
         <outputFile>src/main/java/org/yourname/yourapp/StringKeys.java</outputFile>
       </configuration>
