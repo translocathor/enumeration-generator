@@ -20,28 +20,44 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 /**
  *
  * @author Adrian Bingener
  */
-public class UserTemplateProcessorTest extends PropertiesFixtureTest {
+@RunWith(Parameterized.class)
+public class TemplateProcessorTest extends PropertiesFixtureTest {
 
     /**
      * The template processor that is being tested.
      */
     private TemplateProcessor templateProcessor;
 
-    @Before
-    public void setUpProcessor() {
-        // Create class instance to test
-        templateProcessor = new UserTemplateProcessor(new File("src/test/resources/org/translocathor/egen/fixtures/"), "enumeration-template-user.ftl");
+    public TemplateProcessorTest(TemplateProcessor templateProcessor) {
+        this.templateProcessor = templateProcessor;
+    }
+
+    @Parameters
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][]{
+            {
+                new UserTemplateProcessor(new File("src/test/resources/org/translocathor/egen/fixtures/"), "enumeration-template-user.ftl")
+            },
+            {
+                new DefaultTemplateProcessor(new File(Defaults.ENUMERATION_TEMPLATE_DIRECTORY), Defaults.ENUMERATION_TEMPLATE_FILENAME)
+            }
+        });
     }
 
     @Test
