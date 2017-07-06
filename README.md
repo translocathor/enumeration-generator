@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.com/translocathor/enumeration-generator.svg?token=ZpcGJ6yEo8qSAEiVQXuT&branch=master)](https://travis-ci.com/translocathor/enumeration-generator)
 # Enumeration Generator
 Maven plugin to generate Java enumerations from properties files using [Apache FreeMarker](http://freemarker.org/).
 
