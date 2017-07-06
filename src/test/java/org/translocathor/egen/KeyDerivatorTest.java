@@ -25,7 +25,7 @@ import org.junit.Test;
  *
  * @author Adrian Bingener
  */
-public class KeyDerivatorTest extends PropertiesFixtureTest {
+public class KeyDerivatorTest extends AbstractPropertiesFixtureTest {
 
     /**
      * The key derivator that is tested.

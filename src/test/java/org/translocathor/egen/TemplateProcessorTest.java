@@ -26,7 +26,6 @@ import java.util.Collections;
 import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -37,12 +36,12 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Adrian Bingener
  */
 @RunWith(Parameterized.class)
-public class TemplateProcessorTest extends PropertiesFixtureTest {
+public class TemplateProcessorTest extends AbstractPropertiesFixtureTest {
 
     /**
      * The template processor that is being tested.
      */
-    private TemplateProcessor templateProcessor;
+    private final TemplateProcessor templateProcessor;
 
     public TemplateProcessorTest(TemplateProcessor templateProcessor) {
         this.templateProcessor = templateProcessor;

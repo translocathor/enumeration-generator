@@ -24,7 +24,7 @@ import org.junit.Before;
  *
  * @author Adrian Bingener
  */
-public abstract class PropertiesFixtureTest {
+public abstract class AbstractPropertiesFixtureTest {
 
     /**
      * Empty properties that contain no keys.
