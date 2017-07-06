@@ -34,7 +34,8 @@ import java.util.Optional;
 public abstract class AbstractTemplateProcessor implements TemplateProcessor {
 
     /**
-     * The template that is loaded by this template processor.
+     * The filename of the template that is loaded by
+     * {@link #load(java.lang.String) load}.
      */
     protected String templateFileName;
 
@@ -43,7 +44,7 @@ public abstract class AbstractTemplateProcessor implements TemplateProcessor {
      * given template file name defines the template which is loaded before it
      * is processed.
      *
-     * @param templateFileName The template name that is being processed
+     * @param templateFileName The filename of the template that is processed
      */
     public AbstractTemplateProcessor(String templateFileName) {
         this.templateFileName = templateFileName;
