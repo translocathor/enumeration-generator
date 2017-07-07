@@ -15,7 +15,6 @@
  */
 package org.translocathor.egen;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
 import junit.framework.Assert;
