@@ -23,7 +23,7 @@ package org.example;
 
 public enum StringKeys {
   KEY1,
-  KEY2,
+  KEY2;
 }
 ```
 Now you can access the key-value pairs by using an enum constant like
