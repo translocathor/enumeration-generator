@@ -1,3 +1,4 @@
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 # Notice
 This Plugin is **NOT** yet available at Maven Central. If you want to use it, you will need to clone and build it yourself.
 
@@ -34,7 +35,7 @@ properties.get(StringKeys.KEY1.name());
 ## Usage
 ### Prerequirements
 Since this is a Maven plugin, you need an existing Maven project. You also need to have an exising properties file from where the plugin can extract the keys.
-### 1. Add the plugin to your pom.xml
+### Add the plugin to your pom.xml
 Add the _enumeration-generator-maven-plugin_ to your **pom.xml**. The snippet below shows the 
 ```xml
 ...
@@ -71,3 +72,21 @@ Add the _enumeration-generator-maven-plugin_ to your **pom.xml**. The snippet be
 <plugins>
 ...
 ```
+### Build the project
+This causes Maven to execute the plugin during the _generate-sources_ phase.
+
+License
+=======
+Copyright 2017 Adrian Bingener
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
