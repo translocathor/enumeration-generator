@@ -47,8 +47,8 @@ public class EnumerationGenerationMojo extends AbstractMojo {
      * default enumeration template is used
      * {@link Defaults#ENUMERATION_TEMPLATE_FILENAME ENUMERATION_TEMPLATE_FILENAME}.
      */
-    @Parameter(property = "templatePath", required = false)
-    private File templatePath;
+    @Parameter(property = "templateFile", required = false)
+    private File templateFile;
 
     /**
      * The name of the package that is used in the output file. Since the output
@@ -124,10 +124,10 @@ public class EnumerationGenerationMojo extends AbstractMojo {
         // different when loading it as plugin resource instead as resource of
         // the project which uses the plugin
         TemplateProcessor templateProcessor;
-        if (templatePath == null || !templatePath.exists()) {
+        if (templateFile == null || !templateFile.exists()) {
             templateProcessor = new DefaultTemplateProcessor(new File(Defaults.ENUMERATION_TEMPLATE_DIRECTORY), Defaults.ENUMERATION_TEMPLATE_FILENAME);
         } else {
-            templateProcessor = new UserTemplateProcessor(templatePath.getParentFile(), templatePath.getName());
+            templateProcessor = new UserTemplateProcessor(templateFile.getParentFile(), templateFile.getName());
         }
 
         // Process the template with the data and write the result to the
