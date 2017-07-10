@@ -5,38 +5,14 @@ This Plugin is **NOT** yet available at Maven Central. If you want to use it, yo
 # Enumeration Generator
 Maven plugin to generate Java enumerations from properties files using [Apache FreeMarker](http://freemarker.org/).
 
-## Motivation
-It is a common use case to load predefined key-value pairs from a properties file in a Java application. Whether you load application settings or localization text, you always need to provide a key for the value you want to load. Ususally you end up with code like this
-```java
-properties.get("KEY1");
-```
-Since it is a tedious task to add all keys from your properties file into your application, it is desirable to have a Java enumeration with all the keys generated.
+## Getting Started
+These instructions show a simple example on how to install and configure the plugin. See the [Wiki](https://github.com/translocathor/enumeration-generator/wiki) for more configuration details.
 
-## What does it do?
-The Enumaration Generator uses a *.properties file from your Maven resource folder that looks like this
-```properties
-KEY1=Value1
-KEY2=Value2
-```
-and generates a Java enumeration file in your projects source folder that contains the keys from the properties files as enumeration constants
-```java
-package org.example;
+### Prerequisites
+Since this is a Maven plugin, you need a Maven project. You also need to have an exising properties file from where the plugin can extract the keys.
 
-public enum StringKeys {
-  KEY1,
-  KEY2;
-}
-```
-Now you can access the key-value pairs by using an enumeration constant like
-```java
-properties.get(StringKeys.KEY1.name());
-```
-
-## Usage
-### Prerequirements
-Since this is a Maven plugin, you need an existing Maven project. You also need to have an exising properties file from where the plugin can extract the keys.
-### Add the plugin to your pom.xml
-Add the _enumeration-generator-maven-plugin_ to your **pom.xml**. The snippet below shows the 
+### Installing
+Add the **enumeration-generator-maven-plugin** to your **pom.xml**. The snippet below shows the 
 ```xml
 ...
 <plugins>
@@ -72,8 +48,8 @@ Add the _enumeration-generator-maven-plugin_ to your **pom.xml**. The snippet be
 <plugins>
 ...
 ```
-### Build the project
-This causes Maven to execute the plugin during the _generate-sources_ phase.
+### Execute
+The plugin is executed during the _generate-sources_ phase by default. So you can simply build the project to execute the plugin. If everything is configured correctly, the Java enum should have been generated in the file you specified in the *outputFile* parameter.
 
 License
 =======
