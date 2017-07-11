@@ -6,5 +6,5 @@ public enum StringKeys {
     SETTING_BUTTON_OK_Tooltip,
     T,
     Text,
-    _,
+    _;
 }
