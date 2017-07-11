@@ -1,5 +1,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-
+# Notice
+This plugin is **NOT** yet available at the the Maven Central repository. If you want to use it, you will need to clone and build it yourself. The plugin will be deployed to  Maven Central as soon as possible.
+  
 # Enumeration Generator
 Maven plugin to generate Java enumerations from properties files using [Apache FreeMarker](http://freemarker.org/).
 
