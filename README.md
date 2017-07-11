@@ -10,7 +10,7 @@ These instructions show a simple example on how to install and configure the plu
 Since this is a Maven plugin, you need a Maven project. You also need to have an exising properties file from where the plugin can extract the keys.
 
 ### Installing
-Add the **enumeration-generator-maven-plugin** to your **pom.xml**. The snippet below shows the 
+Add the **enumeration-generator-maven-plugin** to your **pom.xml**.
 ```xml
 ...
 <plugins>
