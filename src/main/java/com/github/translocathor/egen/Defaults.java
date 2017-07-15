@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.translocathor.egen;
+package com.github.translocathor.egen;
 
 /**
  * Defines static default values.
@@ -29,7 +29,7 @@ public class Defaults {
     /**
      * The directory where the default template is located.
      */
-    public static final String ENUMERATION_TEMPLATE_DIRECTORY = "/org/translocathor/egen/";
+    public static final String ENUMERATION_TEMPLATE_DIRECTORY = "/com/github/translocathor/egen/";
     /**
      * The name of the variable that is replaced by the package name that was
      * specified.

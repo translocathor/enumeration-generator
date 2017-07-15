@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.translocathor.egen;
+package com.github.translocathor.egen;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -22,11 +22,12 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * Processes the enum template, which was provided by the user.
+ * Processes the default enum template, which is used if the user did not
+ * provide his own template.
  *
  * @author Adrian Bingener
  */
-public class UserTemplateProcessor extends AbstractTemplateProcessor {
+public class DefaultTemplateProcessor extends AbstractTemplateProcessor {
 
     /**
      * The configuration which is required by FreeMarker to load templates.
@@ -38,17 +39,19 @@ public class UserTemplateProcessor extends AbstractTemplateProcessor {
     private final File templateDirectory;
 
     /**
-     * Creates a new instance of {@link UserTemplateProcessor}. The given
-     * template file defines the template which is loaded before it is
-     * processed. This template file must be located in the resource folder of
-     * the application which uses this plugin, otherwise the loading will fail.
-     * If you want to load the default template in case the user did not provide
-     * any, use the {@link DefaultTemplateProcessor}.
+     * Creates a new instance of {@link DefaultTemplateProcessor}. The given
+     * <code>templateFileName</code> defines the template which is loaded before
+     * it is processed. This template file must be located in the resource
+     * folder of this plugin, otherwise the loading will fail. Further you need
+     * to provide the <code>templateDirectory</code>, which defines the folder
+     * from where the template is loaded. If you want to load a template that
+     * was provided by the user of this plugin, use the
+     * {@link UserTemplateProcessor}.
      *
-     * @param templateDirectory
+     * @param templateDirectory The directory from where the template is loaded
      * @param templateFileName The template that is being processed
      */
-    public UserTemplateProcessor(File templateDirectory, String templateFileName) {
+    public DefaultTemplateProcessor(File templateDirectory, String templateFileName) {
         super(templateFileName);
         this.templateDirectory = templateDirectory;
     }
@@ -58,11 +61,11 @@ public class UserTemplateProcessor extends AbstractTemplateProcessor {
 
         try {
             // Load template from source folder
-            configuration.setDirectoryForTemplateLoading(templateDirectory);
-            return Optional.of(configuration.getTemplate(templateFileName));
+            configuration.setClassForTemplateLoading(this.getClass(), templateDirectory.getPath());
+            return Optional.ofNullable(configuration.getTemplate(templateFileName));
         } catch (IOException ex) {
-            // TODO: Get a logger and print this exception
             ex.printStackTrace();
+            // TODO: Get a logger and print this exception
             return Optional.empty();
         }
     }

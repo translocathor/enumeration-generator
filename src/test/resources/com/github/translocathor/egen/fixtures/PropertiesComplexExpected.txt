@@ -1,4 +1,4 @@
-package org.translocathor.egen.test;
+package com.github.translocathor.egen.test;
 
 public enum StringKeys {
     SETTINGS_BUTTON_CANCEL_Text,

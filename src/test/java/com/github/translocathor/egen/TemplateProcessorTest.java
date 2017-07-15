@@ -13,8 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.translocathor.egen;
+package com.github.translocathor.egen;
 
+import com.github.translocathor.egen.Defaults;
+import com.github.translocathor.egen.UserTemplateProcessor;
+import com.github.translocathor.egen.TemplateProcessor;
+import com.github.translocathor.egen.DefaultTemplateProcessor;
 import java.io.File;
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -51,7 +55,7 @@ public class TemplateProcessorTest extends AbstractPropertiesFixtureTest {
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
             {
-                new UserTemplateProcessor(new File("src/test/resources/org/translocathor/egen/fixtures/"), "enumeration-template-user.ftl")
+                new UserTemplateProcessor(new File("src/test/resources/com/github/translocathor/egen/fixtures/"), "enumeration-template-user.ftl")
             },
             {
                 new DefaultTemplateProcessor(new File(Defaults.ENUMERATION_TEMPLATE_DIRECTORY), Defaults.ENUMERATION_TEMPLATE_FILENAME)
@@ -73,11 +77,11 @@ public class TemplateProcessorTest extends AbstractPropertiesFixtureTest {
         // Process the default template using the default template processor and
         // the simple keys. The output is writter to the given writer.
         Writer stringWriter = new StringWriter();
-        templateProcessor.process("org.translocathor.egen.test", "StringKeys", keys, stringWriter);
+        templateProcessor.process("com.github.translocathor.egen.test", "StringKeys", keys, stringWriter);
 
         // Load the file that contains the expected content for the simple
         // properties
-        InputStream resourceAsStream = getClass().getResourceAsStream("/org/translocathor/egen/fixtures/PropertiesSimpleExpected.txt");
+        InputStream resourceAsStream = getClass().getResourceAsStream("/com/github/translocathor/egen/fixtures/PropertiesSimpleExpected.txt");
         String expected = IOUtils.toString(resourceAsStream, "UTF-8");
 
         Assert.assertTrue("Expected enums to be equal", expected.equals(stringWriter.toString()));
@@ -97,11 +101,11 @@ public class TemplateProcessorTest extends AbstractPropertiesFixtureTest {
         // Process the default template using the default template processor and
         // the simple keys. The output is writter to the given writer.
         Writer stringWriter = new StringWriter();
-        templateProcessor.process("org.translocathor.egen.test", "StringKeys", keys, stringWriter);
+        templateProcessor.process("com.github.translocathor.egen.test", "StringKeys", keys, stringWriter);
 
         // Load the file that contains the expected content for the simple
         // properties
-        InputStream resourceAsStream = getClass().getResourceAsStream("/org/translocathor/egen/fixtures/PropertiesComplexExpected.txt");
+        InputStream resourceAsStream = getClass().getResourceAsStream("/com/github/translocathor/egen/fixtures/PropertiesComplexExpected.txt");
         String expected = IOUtils.toString(resourceAsStream, "UTF-8");
 
         Assert.assertTrue("Expected enums to be equal", expected.equals(stringWriter.toString()));
@@ -121,11 +125,11 @@ public class TemplateProcessorTest extends AbstractPropertiesFixtureTest {
         // Process the default template using the default template processor and
         // the simple keys. The output is writter to the given writer.
         Writer stringWriter = new StringWriter();
-        templateProcessor.process("org.translocathor.egen.test", "StringKeys", keys, stringWriter);
+        templateProcessor.process("com.github.translocathor.egen.test", "StringKeys", keys, stringWriter);
 
         // Load the file that contains the expected content for the simple
         // properties
-        InputStream resourceAsStream = getClass().getResourceAsStream("/org/translocathor/egen/fixtures/PropertiesEmptyExpected.txt");
+        InputStream resourceAsStream = getClass().getResourceAsStream("/com/github/translocathor/egen/fixtures/PropertiesEmptyExpected.txt");
         String expected = IOUtils.toString(resourceAsStream, "UTF-8");
 
         Assert.assertTrue("Expected enums to be empty", expected.equals(stringWriter.toString()));
