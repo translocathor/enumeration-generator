@@ -26,7 +26,7 @@ import java.util.Optional;
  * The template processor interface to load and process FreeMarker
  * {@link Template Templates} to generate a Java enum with the parameters
  * provided by the
- * {@link #process(java.lang.String, java.lang.String, java.util.Set, java.io.Writer) process}
+ * {@link #process(java.lang.String, java.lang.String, java.util.List, java.io.Writer) process}
  * method.
  *
  * @author Adrian Bingener
@@ -35,7 +35,7 @@ public interface TemplateProcessor {
 
     /**
      * Uses the given file to load the template. This method is called by
-     * {@link #process(java.lang.String, java.lang.String, java.util.Set, java.io.Writer) process}
+     * {@link #process(java.lang.String, java.lang.String, java.util.List, java.io.Writer)  process}
      * and may return an empty Optional if an error occurred during the loading.
      *
      * @param templateFileName The file that specifies the template
@@ -45,7 +45,7 @@ public interface TemplateProcessor {
     Optional<Template> load(String templateFileName);
 
     /**
-     * Processes the template provided by the {@link #load(java.io.File) load}
+     * Processes the template provided by the {@link #load(java.lang.String) load}
      * method and writes the result into the given writer. All required
      * parameters for the template are given as arguments.
      *

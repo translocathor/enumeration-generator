@@ -40,11 +40,12 @@ public abstract class AbstractTemplateProcessor implements TemplateProcessor {
     protected String templateFileName;
 
     /**
-     * Creates a new instance of {@link AbstractFileTemplateProcessor}. The
-     * given template file name defines the template which is loaded before it
-     * is processed.
+     * Creates a new instance of {@link AbstractTemplateProcessor}. The given
+     * template file name defines the template which is loaded before it is
+     * processed.
      *
-     * @param templateFileName The filename of the template that is processed
+     * @param templateFileName The templateFileName of the template that is
+     * processed
      */
     public AbstractTemplateProcessor(String templateFileName) {
         this.templateFileName = templateFileName;
