@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.translocathor</groupId>
     <artifactId>enumeration-generator-maven-plugin</artifactId>
-    <version>1.0-BETA</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>Enumeration Generator Maven Plugin</name>
