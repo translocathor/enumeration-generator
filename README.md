@@ -18,29 +18,37 @@ Add the **enumeration-generator-maven-plugin** to your **pom.xml**.
 <plugins>
   ..
   <plugin>
-    <groupId>org.translocathor</groupId>
+    <groupId>com.github.translocathor</groupId>
     <artifactId>enumeration-generator-maven-plugin</artifactId>
-    <version>1.0-BETA</version>
+    <version>1.0-SNAPSHOT</version>
     <executions>
       <execution>
         <id>generate-string-enum</id>
-        <phase>generate-sources</phase>
         <goals>
-          <goal>generate-enumeration</goal>
+            <goal>generate-enumeration</goal>
         </goals>
         <configuration>
-
-          <!-- The name that is used as package name in the output java file -->
-          <packageName>org.yourname.yourapp</packageName>
-
-          <!-- The enum name identifier in the output java file -->
+          <!--
+              Package name that is used for the package
+              declaration in the generated enum.
+          -->
+          <packageName>com.github.translocathor.egen.sample</packageName>
+          <!--
+              The name of the enum in the generated Java file.
+          -->
           <enumName>StringKeys</enumName>
-
-          <!-- The properties file whose keys are used to generate the java enum file -->
-          <propertiesFile>src/main/resources/bundles/strings.properties</propertiesFile>
-
-          <!-- The target for the generated java enum file -->
-          <outputFile>src/main/java/org/yourname/yourapp/StringKeys.java</outputFile>
+          <!--
+              The properties file whose keys are used to
+              derivate the enum constants.
+          -->
+          <propertiesFile>src/main/resources/bundles/de_DE_Strings.properties</propertiesFile>
+          <!--
+              The output file into which the generated Java
+              file is written. If the specified output folder
+              does not exist it will be created. If the file
+              already exists it will be overwritten.
+          -->
+          <outputFile>src/main/java/com/github/translocathor/egen/sample/StringKeys.java</outputFile>
         </configuration>
       </execution>
     </executions>
