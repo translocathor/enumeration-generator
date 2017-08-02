@@ -57,7 +57,7 @@ Add the **enumeration-generator-maven-plugin** to your **pom.xml**.
 ...
 ```
 ### Execute
-The plugin is executed during the _generate-sources_ phase by default. So you can simply build the project to execute the plugin. If everything is configured correctly, the Java enum should have been generated in the file you specified in the *outputFile* parameter.
+The plugin participates in the _generate-sources_ phase by default and thus will be executed during the build. If everything is configured correctly, the Java enum should be generated in the file you specified in the *outputFile* parameter.
 
 License
 =======
