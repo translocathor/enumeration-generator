@@ -12,7 +12,21 @@ These instructions show a simple example on how to install and configure the plu
 Since this is a Maven plugin, you need a Maven project. You also need to have an exising properties file from where the plugin can extract the keys.
 
 ### Installing
-Add the **enumeration-generator-maven-plugin** to your **pom.xml**.
+#### Add the dependency
+Add the **enumeration-generator-maven-plugin** as dependency to your dependencies section in your **pom.xml**.
+```xml
+...
+<dependencies>
+  ...
+    <dependency>
+        <groupId>com.github.translocathor</groupId>
+        <artifactId>enumeration-generator-maven-plugin</artifactId>
+        <version>1.0</version>
+    </dependency>
+</dependencies>
+```
+#### Add the plugin
+Add the **enumeration-generator-maven-plugin** to the plugin section in your **pom.xml**.
 ```xml
 ...
 <plugins>
@@ -20,7 +34,7 @@ Add the **enumeration-generator-maven-plugin** to your **pom.xml**.
   <plugin>
     <groupId>com.github.translocathor</groupId>
     <artifactId>enumeration-generator-maven-plugin</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <executions>
       <execution>
         <id>generate-string-enum</id>
@@ -57,7 +71,7 @@ Add the **enumeration-generator-maven-plugin** to your **pom.xml**.
 ...
 ```
 ### Execute
-The plugin participates in the _generate-sources_ phase by default and thus will be executed during the build. If everything is configured correctly, the Java enum should be generated in the file you specified in the *outputFile* parameter.
+The plugin runs in the _generate-sources_ phase by default and thus will be executed during the build automatically. If everything is configured correctly, the Java enum should be generated in the file you specified in the *outputFile* parameter.
 
 License
 =======
