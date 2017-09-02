@@ -1,4 +1,6 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build](https://travis-ci.org/translocathor/enumeration-generator.svg?branch=master)](https://travis-ci.org/translocathor/enumeration-generator)
+
 # Notice
 This plugin is **NOT** yet available at the the Maven Central repository. If you want to use it, you will need to clone and build it yourself. The plugin will be deployed to  Maven Central as soon as possible.
   
