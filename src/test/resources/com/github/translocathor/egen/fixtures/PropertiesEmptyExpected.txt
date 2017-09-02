@@ -1,0 +1,4 @@
+package com.github.translocathor.egen.test;
+
+public enum StringKeys {
+}
