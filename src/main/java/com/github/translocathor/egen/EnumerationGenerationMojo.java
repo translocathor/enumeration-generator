@@ -116,6 +116,7 @@ public class EnumerationGenerationMojo extends AbstractMojo {
 
         // Get the key set from the loaded properties
         List<String> keys = keyDerivator.derivateKeys(properties);
+        getLog().info(String.format("Loaded %s keys from properties file", keys.size()));
 
         // Check if the user provided a custom template file. If he did, we will
         // use the default template processor, otherwise the custom template
@@ -133,6 +134,7 @@ public class EnumerationGenerationMojo extends AbstractMojo {
         // Process the template with the data and write the result to the
         // writer
         try {
+            getLog().info(String.format("Writing generated enum to %s", outputFile.getAbsolutePath()));
             Writer fileWriter = new FileWriter(outputFile);
             templateProcessor.process(packageName, enumName, keys, fileWriter);
         } catch (IOException ex) {
