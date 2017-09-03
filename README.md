@@ -1,6 +1,6 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Build](https://travis-ci.org/translocathor/enumeration-generator.svg?branch=master)](https://travis-ci.org/translocathor/enumeration-generator)
-[![Code Climate](https://codeclimate.com/github/translocathor/enumeration-generator.png)](https://codeclimate.com/github/translocathor/enumeration-generator)
+[![Code Climate](https://codeclimate.com/github/translocathor/enumeration-generator.svg)](https://codeclimate.com/github/translocathor/enumeration-generator)
 
 # Enumeration Generator
 Maven plugin to generate Java enumerations from properties files using [Apache FreeMarker](http://freemarker.org/).
